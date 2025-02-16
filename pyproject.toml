@@ -1,0 +1,87 @@
+[tool.poetry]
+name = "developstodaytest"
+version = "0.1.0"
+description = ""
+authors = ["Vadym Sulim <ohnooq1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
+langchain = "^0.3.18"
+faiss-cpu = "^1.10.0"
+pydantic = "^2.10.6"
+pandas = "^2.2.3"
+transformers = "^4.48.3"
+sentence-transformers = "^3.4.1"
+huggingface-hub = "^0.28.1"
+python-dotenv = "^1.0.1"
+langchain-community = "^0.3.17"
+langchain-huggingface = "^0.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.6"
+isort = "^6.0.0"
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "migrations",
+    "node_modules",
+    "static",
+    "templates",
+    "venv",
+    "env",
+    ".git",
+    ".idea",
+    ".venv",
+    ".dockerignore",
+    ".env",
+    ".gitignore",
+    ".classpath",
+    ".DS_Store",
+    "*.dbmdl",
+    "*.user",
+    "*.dockerignore",
+    "*.env",
+    "*.git",
+    "*.gitignore",
+    "*.project",
+    "*.settings",
+    "*.toolstarget",
+    "*.classpath",
+    "*.DS_Store",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # PEP8 errors
+    "W",  # PEP8 warnings
+    "F",  # PyFlakes
+    "I",  # isort
+    "B",  # bugbear
+    "C4",  # mypy
+    "N",  # flake8-bugbear
+    "Q",  # flake8-quotes
+]
+ignore = [
+    "C901",  # function too complex
+    "W191",  # indentation contains tabs
+    "D401",  # first line should be in imperative mood
+    "I001"   # isort
+
+]
+
+[tool.isort]
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+lines_after_imports = 2
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
