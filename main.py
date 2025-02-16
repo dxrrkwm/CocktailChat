@@ -22,9 +22,11 @@ cocktails_df["combined_text"] = (cocktails_df["name"] +
 cocktails = cocktails_df.to_dict("records")
 
 
-llm = HuggingFaceHub(repo_id="gpt2",
-                     model_kwargs={"temperature":0.5, "max_new_tokens":200},
-                     huggingfacehub_api_token=os.environ["HUGGINGFACE_API_TOKEN"])
+llm = HuggingFaceHub(
+    repo_id="gpt2",
+    model_kwargs={"temperature": 0.2, "max_new_tokens": 100},
+    huggingfacehub_api_token=os.environ["HUGGINGFACE_API_TOKEN"]
+)
 embeddings = SentenceTransformerEmbeddings(model_name="all-mpnet-base-v2")
 db = FAISS.from_texts(cocktails_df["combined_text"].tolist(), embeddings)
 
