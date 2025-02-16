@@ -9,7 +9,7 @@ from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain_community.llms import HuggingFaceHub
 from langchain_community.vectorstores import FAISS
 
-from schemas import UserMemory, UserQuery
+from schemas.schemas import UserMemory, UserQuery
 
 
 load_dotenv()
