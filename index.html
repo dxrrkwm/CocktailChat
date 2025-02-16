@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        #userInput {
+            width: 500px;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: darkgrey;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your cocktail buddy🍸</h1>
+    <input type="text" id="userInput" placeholder="Ask about cocktails...">
+    <button onclick="sendQuery()">Send</button>
+    <div id="response"></div>
+
+    <script>
+        async function sendQuery() {
+            const userInput = document.getElementById('userInput').value;
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerText = "Thinking...";
+
+            try {
+                const response = await fetch('/ask/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: userInput }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                responseDiv.innerText = data.response;
+            } catch (error) {
+                responseDiv.innerText = `Error: ${error.message}`;
+                console.error("Error: ", error);
+            }
+        }
+    </script>
+</body>
+</html>
